@@ -7,6 +7,7 @@ import bodyParser from 'body-parser'
 import { errorHandler as queryErrorHandler } from 'querymen'
 import { errorHandler as bodyErrorHandler } from 'bodymen'
 import { env } from '../../config'
+import delay from '../../middleware/delay'
 
 export default (routes) => {
   const app = express()
@@ -27,6 +28,7 @@ export default (routes) => {
     app.use(morgan('dev'))
   }
 
+  app.use(delay(300, 1500))
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
   app.use(routes)
